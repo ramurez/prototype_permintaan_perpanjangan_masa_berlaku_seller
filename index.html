@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="id">
+<head><meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1.0"/><meta name="description" content="Prototipe simulasi perpanjangan masa berlaku penawaran SPSE INAPROC sisi Penyedia."/><title>SPSE INAPROC — Perpanjangan Penawaran (Simulasi)</title><link rel="stylesheet" href="styles.css"/></head>
+<body>
+  <div class="simulation-ribbon">PROTOTIPE SIMULASI · DATA FIKTIF · BUKAN SISTEM PRODUKSI</div>
+  <header>
+    <div class="utility-bar"><nav aria-label="Tautan bantuan"><a href="#">Produk Hukum <span>⌄</span></a><a href="#">Pusat Bantuan</a><a href="#">Pengumuman &amp; Berita</a><a href="#">Panduan &amp; Aplikasi <span>⌄</span></a></nav></div>
+    <div class="main-nav">
+      <button class="brand" id="brandHome" aria-label="Kembali ke Beranda"><span class="brand-mark">✣</span><span><strong>INAPROC</strong><small>SPSE V5</small></span></button>
+      <nav class="primary-nav" aria-label="Navigasi utama"><button class="nav-link active" id="homeNav">Beranda</button><button class="nav-link" id="packageNav">Paket Baru</button></nav>
+      <button class="notification-button" id="notificationButton" aria-label="Buka notifikasi"><span class="bell-icon" aria-hidden="true">♢</span><span class="notification-count" id="notificationCount">1</span></button>
+      <div class="account"><span class="avatar">R</span><span><strong>rekanan.demo</strong><small>Penyedia · Simulasi</small></span></div>
+    </div>
+  </header>
+  <aside class="notification-drawer" id="notificationDrawer" aria-hidden="true"><div class="drawer-head"><strong>Notifikasi</strong><button class="icon-button" data-close-drawer aria-label="Tutup">×</button></div><div id="notificationList"></div></aside>
+
+  <main>
+    <section id="listView" class="app-view">
+      <nav class="breadcrumb" aria-label="Breadcrumb"><a href="#">Beranda</a><span>›</span><span>Tender</span></nav>
+      <div class="list-title-row"><h1>Status Tender Yang Anda Ikuti</h1><a class="guide-link" href="#">▣&nbsp; Panduan</a></div>
+      <section class="important-info" aria-label="Informasi penting"><span class="info-icon">i</span><div><h2>Informasi Penting untuk Penyedia</h2><p>Kepada Penyedia yang memenangkan paket dan berkontrak, silakan login melalui website <a href="#">akun.inaproc.id</a> dan lanjutkan pembuatan pesanan dengan mengakses Katalog Elektronik v6.</p><p>Mohon gunakan “Kode Verifikasi Pesanan SPSE” untuk menghubungkan transaksi SPSE dengan Katalog Elektronik v6.</p></div><button class="icon-button close-info" aria-label="Tutup informasi">×</button></section>
+      <div class="page-tabs list-tabs" role="tablist"><button class="page-tab active" role="tab" aria-selected="true">Tender</button><button class="page-tab" role="tab">Non Tender</button></div>
+      <section class="filter-bar" aria-label="Pencarian tender"><label class="search-field"><span aria-hidden="true">⌕</span><input id="tenderSearch" type="search" placeholder="Cari kode tender atau nama paket"/></label><select id="agencyFilter" aria-label="Filter instansi"><option>Pilih K/L/PD/Instansi Lainnya</option><option>Kementerian Infrastruktur Digital</option></select><select id="statusFilter" aria-label="Filter status"><option value="all">Aktif</option><option value="needs-response">Perlu Respons</option></select><button class="button secondary small" id="resetFilters">Reset</button></section>
+      <section class="tender-list" id="tenderList" aria-label="Daftar tender">
+        <article class="tender-row priority" data-search="01KPMWZP26C88ZFG4JBS8SCVMT pengadaan peralatan pemantauan kualitas air wilayah barat" data-status="needs-response">
+          <div class="tender-main"><button class="tender-title-link open-request">[SIMULASI] Pengadaan Peralatan Pemantauan Kualitas Air Wilayah Barat</button><p>Kode Tender: 01KPMWZP26C88ZFG4JBS8SCVMT · Pengadaan Barang</p><div class="meta-line"><span class="tag dark">Tender</span><span>⌂ Kementerian Infrastruktur Digital (Fiktif) · TA 2026</span></div></div>
+          <div class="tender-status"><span>Status</span><strong class="tag green-soft">Tender Sedang Berjalan</strong><a href="#">Tahap: Evaluasi Penawaran</a><div class="status-divider"></div><strong class="tag request-tag waiting" id="listRequestStatus">Permintaan Perpanjangan Masa Berlaku</strong><small class="request-deadline">Batas respons: 31 Okt 2026, 23:59 WIB</small><button class="tender-status-link open-request" id="openRequest">Tinjau permintaan</button></div><div class="tender-value"><span>Nilai HPS</span><strong>Rp 2,47 Miliar</strong></div>
+        </article>
+        <article class="tender-row" data-search="01M4SNHSM5P8KEC08T8811F1WT supervisi rehabilitasi jaringan irigasi" data-status="active"><div class="tender-main"><button class="tender-title-link">Supervisi Rehabilitasi Jaringan Irigasi Wilayah Utara</button><p>Kode Tender: 01M4SNHSM5P8KEC08T8811F1WT · Jasa Konsultansi</p><div class="meta-line"><span class="tag dark">Seleksi</span><span>⌂ Kementerian Pekerjaan Umum · TA 2026</span></div></div><div class="tender-status"><span>Status</span><strong class="tag green-soft">Tender Sedang Berjalan</strong><a href="#">Tahap: Pembuktian Kualifikasi</a></div><div class="tender-value"><span>Nilai HPS</span><strong>Rp 860 Juta</strong></div></article>
+        <article class="tender-row" data-search="01M3X607DBPKJ2BMPZY25WJX3Y pengadaan perangkat pusat data" data-status="active"><div class="tender-main"><button class="tender-title-link">Pengadaan Perangkat Pusat Data Regional</button><p>Kode Tender: 01M3X607DBPKJ2BMPZY25WJX3Y · Pengadaan Barang</p><div class="meta-line"><span class="tag dark">Tender Cepat</span><span>⌂ Kota Arunika (Fiktif) · TA 2026</span></div></div><div class="tender-status"><span>Status</span><strong class="tag green-soft">Tender Sedang Berjalan</strong><a href="#">Tahap: Upload Dokumen Penawaran</a></div><div class="tender-value"><span>Nilai HPS</span><strong>Rp 1,25 Miliar</strong></div></article>
+      </section>
+      <div class="empty-filter" id="emptyFilter" hidden>Tidak ada tender yang sesuai dengan pencarian.</div>
+    </section>
+
+    <section id="detailView" class="app-view" hidden>
+      <section class="important-info detail-info" aria-label="Informasi penting"><span class="info-icon">i</span><div><h2>Informasi Penting untuk Penyedia</h2><p>Kepada Penyedia yang memenangkan paket dan berkontrak, silakan melanjutkan proses melalui layanan INAPROC terkait. Gunakan kode verifikasi SPSE pada halaman detail paket sesuai ketentuan yang berlaku.</p><p>Silakan hubungi pusat bantuan jika mengalami kendala dalam mengakses atau menggunakan kode verifikasi.</p></div><button class="icon-button close-info" aria-label="Tutup informasi">×</button></section>
+      <nav class="breadcrumb detail-breadcrumb" aria-label="Breadcrumb"><button id="backToList">Beranda</button><span>›</span><span>Informasi Tender</span></nav>
+      <div class="page-tabs detail-tabs" role="tablist"><button class="page-tab active" role="tab" aria-selected="true">Informasi Tender</button><button class="page-tab" role="tab">Pertanyaan <span class="count-pill">0</span> &amp; Penjelasan <span class="count-pill">0</span></button><button class="page-tab" role="tab">Sanggahan <span class="count-pill">0</span></button></div>
+      <section class="detail-card">
+        <div class="card-accent"></div><h1>Informasi Tender [SIMULASI] Pengadaan Peralatan Pemantauan Kualitas Air Wilayah Barat</h1><div class="system-notice"><span>×</span><strong>Seluruh data tender pada prototype ini bersifat fiktif dan hanya digunakan untuk simulasi alur.</strong></div>
+        <div class="detail-grid basic-info"><dl><div><dt>Kode Tender</dt><dd>01KPMWZP26C88ZFG4JBS8SCVMT <span class="tag blue">sesi 14</span></dd></div><div><dt>Nama Tender</dt><dd>[SIMULASI] Pengadaan Peralatan Pemantauan Kualitas Air Wilayah Barat <span class="tag gray">Detail</span></dd></div><div><dt>Tahap Tender Saat Ini</dt><dd><a href="#">Evaluasi Penawaran</a></dd></div><div><dt>Dokumen Pemilihan</dt><dd>Dokumen Pemilihan sudah tidak bisa diunduh kembali.</dd></div><div><dt>Kualifikasi</dt><dd><div class="native-panel"><div class="native-panel-head">Data Kualifikasi</div><div class="native-panel-body">Persyaratan Kualifikasi <span class="tag green">Status: Sudah dikirim pada 15 Oktober 2026 10:42 WIB</span> <a class="tag blue" href="#">Lihat Data</a></div></div></dd></div></dl></div>
+        <div class="detail-grid offer-block"><h2>Penawaran Anda</h2><div><div class="native-panel offer-panel"><div class="native-panel-head"><span>Dokumen Penawaran Administrasi, Teknis, dan Harga</span><a href="#">Lihat Penawaran</a></div><div class="native-panel-body offer-lines"><p><span>Status penawaran</span><strong>: <span class="tag green">Sudah dikirim</span></strong></p><p><span>Sudah dikirim pada</span><strong>: 15 Oktober 2026 10:42 WIB</strong></p><p><span>Masa berlaku</span><strong>: 90 Hari Kalender</strong></p><p><span>Berakhir efektif</span><strong id="offerExpiryText">: 31 Oktober 2026 23:59 WIB</strong></p></div>
+          <div class="request-table-section" id="extensionPanel"><div class="request-section-head"><strong>Permintaan Perpanjangan Masa Berlaku</strong><span class="status-badge waiting" id="requestStatus">Menunggu Respons</span></div><div class="native-panel-body request-lines"><p><span>Batas respons</span><strong>: 31 Oktober 2026 23:59 WIB <small class="inline-hint">(mengikuti masa berlaku penawaran saat ini)</small></strong></p><p><span>Jaminan penawaran</span><strong id="guaranteeRequirementText">: Dapat diperbarui (opsional)</strong></p><p><span>Catatan Pokja</span><strong>: Mohon memberikan respons atas permintaan perpanjangan masa berlaku penawaran.</strong></p><p class="request-reference"><span>Diterima pada</span><strong>: 23 Oktober 2026 08:35 WIB</strong></p></div><div class="status-detail" id="statusDetail" hidden></div><div class="request-footer"><small>Jika melewati batas respons, status penyedia mengikuti ketentuan yang berlaku.</small><div class="action-row" id="actionRow"><button class="button secondary danger" id="rejectButton">Tolak</button><button class="button primary" id="acceptButton">Terima Permintaan</button></div></div></div>
+        </div></div>
+        </div></div>
+        <div class="detail-grid compact-section"><h2>Undangan</h2><div><span class="tag gray">Cetak Undangan Pembuktian Kualifikasi</span></div></div><div class="detail-grid compact-section"><h2>Hasil Evaluasi</h2><div><p><strong>Evaluasi Penawaran Administrasi dan Teknis</strong><br/>Lulus: <span class="tag gray">1 Penyedia Barang/Jasa</span></p><p><strong>Evaluasi Penawaran Biaya/Harga</strong><br/>Lulus: <span class="tag gray">1 Penyedia Barang/Jasa</span></p></div></div>
+        <details class="history-disclosure"><summary>Lihat riwayat perpanjangan</summary><section class="history-section"><div class="section-title-row"><h2>Riwayat Permintaan Perpanjangan</h2><span class="tag gray">Tercatat otomatis</span></div><div class="table-wrap"><table><thead><tr><th>Waktu</th><th>Nomor</th><th>Target</th><th>Status</th><th>Keterangan</th></tr></thead><tbody id="historyBody"><tr><td>23 Okt 2026<br/><small>08:35 WIB</small></td><td>PP-2026-0017</td><td>30 Nov 2026<br/><small>23:59 WIB</small></td><td><span class="status-badge waiting">Menunggu Respons</span></td><td>Permintaan diterima Penyedia</td></tr></tbody></table></div></section></details>
+      </section>
+      <section class="demo-controls" aria-label="Kontrol demo"><div><p class="eyebrow">KONTROL DEMO</p><h2>Uji setiap kondisi</h2><p>Kontrol ini hanya tersedia pada prototipe.</p></div><div class="control-actions"><label>Ubah state<select id="demoState"><option value="waiting">Menunggu Respons</option><option value="no-response">Tidak Direspons</option><option value="unfinished">Tidak Selesai</option><option value="accepted">Berhasil</option><option value="rejected">Ditolak</option></select></label><button class="button secondary" id="applyDemoState">Terapkan State</button><button class="button ghost" id="resetDemo">Reset Demo</button></div><div class="repeat-box" id="repeatBox" hidden><div><strong>Simulasi permintaan berikutnya</strong><p>Hanya aktif setelah permintaan sebelumnya terminal dan tender masih eligible.</p></div><button class="button primary small" id="repeatRequest">Buat Permintaan Ulang</button></div></section>
+    </section>
+  </main>
+
+  <div class="toast-region" id="toastRegion" aria-live="polite"></div>
+  <div class="modal-backdrop" id="confirmModal" role="dialog" aria-modal="true" aria-labelledby="confirmTitle" hidden><div class="modal small-modal"><div class="modal-head"><h2 id="confirmTitle">Konfirmasi</h2><button class="icon-button" data-close-modal aria-label="Tutup">×</button></div><div class="modal-body" id="confirmBody"></div><div class="modal-actions" id="confirmActions"></div></div></div>
+  <div class="modal-backdrop" id="apendoModal" role="dialog" aria-modal="true" aria-labelledby="apendoTitle" hidden>
+    <div class="modal apendo-modal">
+      <div class="modal-head"><div><p class="eyebrow">SIMULASI APENDO</p><h2 id="apendoTitle">Perpanjang Masa Berlaku Penawaran</h2></div><button class="icon-button" data-close-apendo aria-label="Tutup">×</button></div>
+      <div class="modal-body">
+        <ol class="stepper" aria-label="Tahapan proses">
+          <li class="active" data-step="1"><span>1</span>Masa berlaku</li>
+          <li data-step="2"><span>2</span>Jaminan</li>
+          <li data-step="3"><span>3</span>Review surat</li>
+          <li data-step="4"><span>4</span>E-sign</li>
+        </ol>
+
+        <div class="apendo-security"><span>◆</span><p><strong>APENDO — mode simulasi</strong><br/>Tidak ada dokumen atau tanda tangan elektronik nyata yang dikirim.</p></div>
+
+        <section class="flow-step" id="apendoStepOne">
+          <div class="flow-section-head"><div><h3>Masa Berlaku Penawaran</h3><p>Pilih tanggal baru untuk menggantikan masa berlaku surat penawaran saat ini.</p></div><span class="step-chip">Langkah 1 dari 4</span></div>
+          <div class="validity-grid"><div><span>Masa berlaku saat ini</span><strong id="currentValidityText">31 Oktober 2026 23:59 WIB</strong></div><div><label class="field-label" for="newValidityDate">Masa berlaku baru <span class="required">*</span></label><div class="date-field"><input type="date" min="2026-11-01" id="newValidityDate"/><span>23:59 WIB</span></div><p class="field-hint" id="dateError">Pilih tanggal setelah masa berlaku penawaran saat ini.</p></div></div>
+          <div class="expiry-preview"><span>Perubahan masa berlaku</span><strong id="newExpiryPreview">Pilih tanggal masa berlaku baru</strong><small id="expiryPreviewHint">Tanggal lama tetap berlaku sampai proses e-sign berhasil.</small></div>
+          <label class="check-row"><input type="checkbox" id="acknowledge"/> <span>Saya telah memeriksa tanggal masa berlaku baru yang dipilih.</span></label>
+        </section>
+
+        <section class="flow-step" id="apendoStepGuarantee" hidden>
+          <div class="flow-section-head"><div><h3>Pembaruan Jaminan Penawaran</h3><p>Opsional. Tambahkan dokumen hanya jika jaminan penawaran perlu diperbarui.</p></div><span class="step-chip">Langkah 2 dari 4</span></div>
+          <div class="guarantee-summary"><div><span>Pembaruan dokumen</span><strong id="guaranteeScenarioLabel">Opsional</strong></div><div><span>Masa berlaku penawaran baru</span><strong id="guaranteeMinimumDate">30 November 2026 23:59 WIB</strong></div></div>
+          <div class="admin-table" id="guaranteeRequiredPanel">
+            <div class="admin-table-head"><span>No</span><span>Nama</span><span>Dokumen</span><span>Aksi</span></div>
+            <div class="admin-table-row"><span>1</span><div><strong>Jaminan Penawaran</strong><small>Tambahkan dokumen pengganti jika diperlukan.</small></div><div id="guaranteeDocument"><span class="empty-document">Tidak diperbarui</span></div><div class="upload-action"><input type="file" id="guaranteeFile" accept=".pdf,.doc,.docx,.jpg,.jpeg,.png" hidden/><label class="outline-upload" for="guaranteeFile">＋ Tambah</label><small>.pdf, .doc, .docx, .jpg, .jpeg, .png</small><button class="text-button" id="useSampleGuarantee" type="button">Gunakan dokumen contoh</button></div></div>
+          </div>
+          <div class="not-required-note optional-note"><span>i</span><div><strong>Tidak wajib mengunggah ulang</strong><p>Anda dapat melanjutkan tanpa dokumen baru. Jaminan penawaran lama tidak diubah.</p></div></div>
+        </section>
+
+        <section class="flow-step" id="apendoStepReview" hidden>
+          <div class="flow-section-head"><div><h3>Review Surat Penawaran</h3><p>Periksa perubahan sebelum proses tanda tangan elektronik.</p></div><span class="step-chip">Langkah 3 dari 4</span></div>
+          <article class="letter-preview">
+            <div class="letter-toolbar"><strong>Surat Penawaran — Versi Perpanjangan</strong><span class="tag gray">Preview</span></div>
+            <div class="letter-paper"><div class="letter-brand"><span class="mini-mark">✣</span><div><strong>PT Tirta Instrumen Nusantara</strong><small>Data perusahaan fiktif untuk simulasi</small></div></div><h4>SURAT PENAWARAN</h4><p class="letter-number">Nomor: SP-017/X/2026</p><dl><div><dt>Nama paket</dt><dd>Pengadaan Peralatan Pemantauan Kualitas Air Wilayah Barat</dd></div><div><dt>Masa berlaku sebelumnya</dt><dd>31 Oktober 2026 23:59 WIB</dd></div><div><dt>Masa berlaku baru</dt><dd id="reviewNewExpiry">30 November 2026 23:59 WIB</dd></div><div><dt>Jaminan penawaran</dt><dd id="reviewGuaranteeName">Tidak diperbarui</dd></div></dl><p>Nilai dan substansi penawaran tetap mengacu pada dokumen penawaran yang telah disampaikan sebelumnya.</p></div>
+          </article>
+          <label class="check-row"><input type="checkbox" id="reviewAcknowledge"/> <span>Saya telah meninjau surat penawaran dan informasi di atas sudah sesuai.</span></label>
+        </section>
+
+        <section class="flow-step" id="apendoStepSign" hidden>
+          <div class="flow-section-head"><div><h3>Tanda Tangan Elektronik</h3><p>Langkah terakhir untuk menyelesaikan perpanjangan penawaran.</p></div><span class="step-chip">Langkah 4 dari 4</span></div>
+          <div class="sign-card"><div class="sign-icon">✓</div><div><strong>Siap ditandatangani</strong><p>Surat penawaran dan pembaruan dokumen jaminan, jika ada, akan dicatat sebagai satu rangkaian proses perpanjangan.</p></div></div>
+          <div class="sign-summary"><p><span>Masa berlaku baru</span><strong id="signNewExpiry">30 November 2026 23:59 WIB</strong></p><p><span>Dokumen jaminan</span><strong id="signGuaranteeName">Tidak diperbarui</strong></p></div>
+          <label class="check-row"><input type="checkbox" id="signAcknowledge"/> <span>Saya menyatakan berwenang melakukan tanda tangan elektronik untuk perusahaan.</span></label>
+        </section>
+
+        <section id="apendoProgress" hidden><div class="processing-card"><div class="spinner" id="processingSpinner"></div><h3 id="processingTitle">Memproses tanda tangan elektronik…</h3><p id="processingText">Mencatat dokumen dan tanda tangan elektronik mock.</p><div class="progress-list"><p id="progressGuarantee"><span>○</span> Verifikasi dokumen jaminan</p><p id="progressDoc"><span>○</span> Perbarui surat penawaran</p><p id="progressSign"><span>○</span> Tanda tangan elektronik (mock)</p><p id="progressSync"><span>○</span> Sinkronkan status</p></div></div></section>
+      </div>
+      <div class="modal-actions flow-actions" id="apendoActions"><button class="button secondary" data-close-apendo>Batal</button><button class="button primary" id="flowNextButton">Lanjutkan ke Jaminan</button></div>
+    </div>
+  </div>
+  <footer><div class="footer-inner"><div class="footer-brand"><span class="brand-mark">✣</span><span><strong>INAPROC</strong><small>SPSE V5</small></span></div><div><h3>Produk Hukum</h3><a href="#">Syarat &amp; Ketentuan</a><a href="#">Kebijakan Privasi</a><a href="#">Pakta Integritas</a><a href="#">Peraturan</a></div><div><h3>Panduan</h3><a href="#">Panduan Pembeli</a><a href="#">Panduan Penyedia</a></div><div><h3>Hubungi Kami</h3><p>☎ Call Center 144</p><p>◉ WhatsApp LKPP: 08 111 5577 09</p><p>✉ layanan@lkpp.go.id</p></div></div><div class="footer-bottom">23 Oktober 2026 08:45 WIB · Sesi Pelatihan: Realtime<br/>© 2026 Lembaga Kebijakan Pengadaan Barang/Jasa Pemerintah (LKPP)</div></footer>
+  <script src="app.js"></script>
+</body>
+</html>
