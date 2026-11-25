@@ -27,6 +27,7 @@ footer{background:#f4f5f8;color:#5f6a7d;padding:34px 24px 20px}.footer-inner{wid
 /* Penyelarasan informasi tender dan status pembaruan jaminan opsional. */
 .basic-info dl{grid-column:1/-1}
 .basic-info dl>div{grid-template-columns:210px minmax(0,1fr);gap:16px}
+.validity-sub-label{margin-top:18px}
 .not-required-note>span{flex:0 0 auto}
 .optional-note{margin-top:12px}
 @media(max-width:900px){.basic-info dl>div{grid-template-columns:150px 1fr;gap:16px}}

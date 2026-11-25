@@ -28,13 +28,12 @@ function formatDate(date) {
   const value = (type) => parts.find((part) => part.type === type)?.value || '';
   return `${value('day')} ${value('month')} ${value('year')} ${value('hour')}:${value('minute')} WIB`;
 }
-function addCalendarDays(base, days) { const result = new Date(base.getTime()); result.setDate(result.getDate() + Number(days)); return result; }
-function formatDateInput(date) {
-  const parts = new Intl.DateTimeFormat('en-CA', { year: 'numeric', month: '2-digit', day: '2-digit', timeZone: 'Asia/Jakarta' }).formatToParts(date);
+function addCalendarDays(base, days) { const result = new Date(base.getTime()); result.setUTCDate(result.getUTCDate() + Number(days)); return result; }
+function getTodayInJakarta() {
+  const parts = new Intl.DateTimeFormat('en-CA', { year: 'numeric', month: '2-digit', day: '2-digit', timeZone: 'Asia/Jakarta' }).formatToParts(new Date());
   const value = (type) => parts.find((part) => part.type === type)?.value || '';
-  return `${value('year')}-${value('month')}-${value('day')}`;
+  return new Date(`${value('year')}-${value('month')}-${value('day')}T23:59:00+07:00`);
 }
-function parseValidityDate(value) { return value ? new Date(`${value}T23:59:00+07:00`) : null; }
 function formatBytes(bytes) { if (!bytes) return '0 KB'; return bytes < 1048576 ? `${Math.max(1, Math.round(bytes / 1024))} KB` : `${(bytes / 1048576).toFixed(1)} MB`; }
 function escapeHtml(text) { const div = document.createElement('div'); div.textContent = text; return div.innerHTML; }
 function toast(message) { const item = document.createElement('div'); item.className = 'toast'; item.textContent = message; $('#toastRegion').append(item); setTimeout(() => item.remove(), 3400); }
@@ -91,27 +90,30 @@ function resetProcessIndicators() {
 }
 function openApendo() {
   state.flowStep = 1; state.uploadedGuarantee = null; state.newExpiry = null;
-  $('#newValidityDate').value = ''; $('#newValidityDate').min = formatDateInput(addCalendarDays(state.expiry, 1));
+  $('#newValidityDays').value = '';
   $('#currentValidityText').textContent = formatDate(state.expiry);
+  $('#todayReferenceText').textContent = formatDate(getTodayInJakarta());
   $('#acknowledge').checked = false; $('#reviewAcknowledge').checked = false; $('#signAcknowledge').checked = false; $('#guaranteeFile').value = '';
   $('#dateError').classList.remove('error'); resetProcessIndicators(); renderGuaranteeDocument(); updateExpiryPreview(); renderFlowStep();
   apendoModal.hidden = false; document.body.style.overflow = 'hidden';
 }
 function updateExpiryPreview() {
-  const value = $('#newValidityDate').value;
-  const candidate = parseValidityDate(value);
+  const rawValue = $('#newValidityDays').value.trim();
+  const days = Number(rawValue);
+  const today = getTodayInJakarta();
+  const candidate = Number.isInteger(days) && days >= 1 ? addCalendarDays(today, days) : null;
   const valid = Boolean(candidate && candidate > state.expiry);
   state.newExpiry = valid ? candidate : null;
-  $('#dateError').classList.toggle('error', Boolean(value) && !valid);
+  $('#dateError').classList.toggle('error', Boolean(rawValue) && !valid);
   if (!valid) {
-    $('#newExpiryPreview').textContent = 'Pilih tanggal masa berlaku baru';
-    $('#expiryPreviewHint').textContent = 'Tanggal lama tetap berlaku sampai proses e-sign berhasil.';
+    $('#newExpiryPreview').textContent = rawValue && candidate ? 'Tanggal hasil perhitungan harus setelah masa berlaku aktif' : 'Masukkan jumlah hari masa berlaku baru';
+    $('#expiryPreviewHint').textContent = 'Minimal 1 hari kalender, tanpa batas maksimum jumlah hari.';
     $('#guaranteeMinimumDate').textContent = 'Menunggu tanggal baru';
     return;
   }
   const formatted = formatDate(candidate);
-  $('#newExpiryPreview').textContent = `${formatDate(state.expiry)} → ${formatted}`;
-  $('#expiryPreviewHint').textContent = 'Tanggal baru akan aktif setelah proses e-sign berhasil.';
+  $('#newExpiryPreview').textContent = `${formatDate(today)} + ${days} hari = ${formatted}`;
+  $('#expiryPreviewHint').textContent = 'Tanggal hasil perhitungan akan menggantikan masa berlaku lama setelah proses e-sign berhasil.';
   $('#guaranteeMinimumDate').textContent = formatted; $('#reviewNewExpiry').textContent = formatted; $('#signNewExpiry').textContent = formatted;
 }
 function setStepper(step) {
@@ -134,7 +136,7 @@ function renderFlowStep() {
 function handleFlowNext() {
   if (state.flowStep === 1) {
     updateExpiryPreview();
-    if (!state.newExpiry) { $('#dateError').classList.add('error'); $('#newValidityDate').focus(); return; }
+    if (!state.newExpiry) { $('#dateError').classList.add('error'); $('#newValidityDays').focus(); return; }
     if (!$('#acknowledge').checked) { toast('Centang konfirmasi pemeriksaan tanggal untuk melanjutkan.'); return; }
   }
   if (state.flowStep === 3 && !$('#reviewAcknowledge').checked) { toast('Konfirmasikan bahwa surat penawaran telah ditinjau.'); return; }
@@ -155,7 +157,7 @@ function syncReviewSummary() {
   if (state.newExpiry) { $('#reviewNewExpiry').textContent = formatDate(state.newExpiry); $('#signNewExpiry').textContent = formatDate(state.newExpiry); }
 }
 
-$('#newValidityDate').addEventListener('input', updateExpiryPreview);
+$('#newValidityDays').addEventListener('input', updateExpiryPreview);
 $('#guaranteeFile').addEventListener('change', (event) => {
   const file = event.target.files[0]; if (!file) return;
   const extension = file.name.split('.').pop().toLowerCase();
@@ -188,9 +190,9 @@ function finishExtension() {
 
 function applyDemoState(kind) {
   if (kind === 'waiting') { updateStatus('waiting'); toast('State dikembalikan ke Menunggu Respons.'); return; }
-  if (kind === 'no-response') { updateStatus(kind, '<strong>Batas respons telah berakhir pada 31 Oktober 2026 23:59 WIB.</strong><br>Tidak ada respons Penyedia yang tercatat. Status penyedia mengikuti ketentuan yang berlaku.'); appendHistory('Tidak Direspons', 'muted', 'Masa berlaku penawaran berakhir tanpa respons Penyedia'); addNotification('Batas respons telah berakhir', 'Permintaan PP-2026-0017 berstatus Tidak Direspons.'); }
+  if (kind === 'no-response') { updateStatus(kind, '<strong>Permintaan expired pada 31 Oktober 2026 23:59 WIB.</strong><br>Tidak ada respons Penyedia yang tercatat. Tombol Terima dan Tolak tidak lagi tersedia, dan masa berlaku penawaran tidak berubah.'); appendHistory('Tidak Direspons', 'muted', 'Permintaan expired tanpa respons Penyedia; masa berlaku lama tetap digunakan'); addNotification('Permintaan telah expired', 'Permintaan PP-2026-0017 ditutup dengan status Tidak Direspons.'); }
   if (kind === 'unfinished') { updateStatus(kind, '<strong>Proses perpanjangan belum selesai.</strong><br>Penyedia telah menerima permintaan, tetapi input tanggal, review surat, atau e-sign tidak diselesaikan.'); appendHistory('Tidak Selesai', 'danger', 'Proses perpanjangan simulasi tidak diselesaikan'); addNotification('Perpanjangan tidak selesai', 'Proses simulasi berhenti sebelum sinkronisasi status.'); }
-  if (kind === 'accepted') { const target = addCalendarDays(new Date('2026-10-31T23:59:00+07:00'), 30); state.expiry = target; $('#offerExpiryText').textContent = `: ${formatDate(target)}`; updateStatus(kind, `<strong>Berhasil pada 27 Oktober 2026 10:15 WIB</strong><br>Masa berlaku baru: ${formatDate(target)}<br><small>Surat penawaran dan tanda tangan elektronik pada prototype ini adalah mock.</small>`); appendHistory('Berhasil', 'success', 'Perpanjangan 30 hari kalender selesai'); addNotification('State Berhasil diterapkan', 'Masa berlaku penawaran diperbarui pada simulasi.'); }
+  if (kind === 'accepted') { const target = addCalendarDays(getTodayInJakarta(), 30); state.expiry = target; $('#offerExpiryText').textContent = `: ${formatDate(target)}`; updateStatus(kind, `<strong>Berhasil pada 27 Oktober 2026 10:15 WIB</strong><br>Jumlah hari: 30 hari kalender<br>Masa berlaku baru: ${formatDate(target)}<br><small>Surat penawaran dan tanda tangan elektronik pada prototype ini adalah mock.</small>`); appendHistory('Berhasil', 'success', 'Perpanjangan 30 hari kalender dari tanggal hari ini selesai'); addNotification('State Berhasil diterapkan', 'Masa berlaku penawaran diperbarui pada simulasi.'); }
   if (kind === 'rejected') { updateStatus(kind, '<strong>Ditolak pada 27 Oktober 2026 10:15 WIB</strong><br>Alasan: Simulasi penolakan melalui kontrol demo.<br><small>Notifikasi mock telah dicatat untuk Pokja Pemilihan.</small>'); appendHistory('Ditolak', 'danger', 'Penolakan diterapkan melalui kontrol demo'); addNotification('State Ditolak diterapkan', 'Notifikasi Pokja bersifat mock.'); }
 }
 
